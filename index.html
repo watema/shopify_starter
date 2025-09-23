@@ -1,0 +1,51 @@
+<!-- Shopify Starter Theme Template by Watema Emmanuel -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starter Shopify Theme</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <h1>WeRetail</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#cart">Cart</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <h2>Premium Products. Powerful Style.</h2>
+    <p>Shop electronics, fashion, and wellness items today.</p>
+    <a href="#products" class="cta-button">Shop Now</a>
+  </section>
+
+  <section id="products" class="product-grid">
+    {% for product in collections.frontpage.products %}
+    <article class="product">
+      <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" />
+      <h3>{{ product.title }}</h3>
+      <p>{{ product.price | money }}</p>
+      <form method="post" action="/cart/add">
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+        <button type="submit">Add to Cart</button>
+      </form>
+    </article>
+    {% endfor %}
+  </section>
+
+  <section id="cart" class="cart">
+    <h2>Your Cart</h2>
+    <p>No items yet. (Dynamic cart content will be rendered via Liquid or JS)</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 WeRetail Global LLC</p>
+  </footer>
+</body>
+</html>
